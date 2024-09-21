@@ -1,0 +1,29 @@
+POST http://localhost:3001/api/v1/clients
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nom": "Gaye",
+  "prenom": "",
+  "telephone": "",
+  "mail": "@example.com",
+  "password": "",
+  "photo": ".jpag"
+}
+
+###
+
+GET http://localhost:3001/api/v1/clients
+
+###
+
+GET http://localhost:3001/api/v1/clients/1
+
+###
+POST http://localhost:3001/api/v1/clients/telephone
+Content-Type: application/json
+Accept: application/json
+
+{
+  "telephone": ""
+}

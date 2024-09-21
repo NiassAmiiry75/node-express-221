@@ -1,0 +1,27 @@
+POST http://localhost:3002/api/v1/articles
+Content-Type: application/json
+Accept: application/json
+
+{
+  "libelle": "article3",
+  "prix": 500,
+  "quantiteStock": 48000
+}
+
+###
+
+GET http://localhost:3002/api/v1/articles
+
+###
+
+GET http://localhost:3002/api/v1/articles/1
+
+###
+
+POST http://localhost:3002/api/v1/articles/libelle
+Content-Type: application/json
+Accept: application/json
+
+{
+  "libelle": "article3"
+}
