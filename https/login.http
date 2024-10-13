@@ -6,6 +6,10 @@ Accept: application/json
   "clientId": 1,
   "password": ""
 }
+{
+  "client": 1,
+  "password": ""
+}
 ###
 
 GET http://localhost:3001/login

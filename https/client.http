@@ -8,7 +8,7 @@ Accept: application/json
   "telephone": "",
   "mail": "@example.com",
   "password": "",
-  "photo": ".jpag"
+  "photo": ".png"
 }
 
 ###

@@ -1,0 +1,25 @@
+POST http://localhost:3002/api/v1/aurh/register
+Content-Type: application/json
+Accept: application/json
+
+{
+  "login": "client",
+  "password": "client",
+  "clientId": 3
+}
+
+###
+
+GET http://localhost:3002/api/v1/auth/register
+
+###
+
+POST http://localhost:3002/api/v1/Auth/login
+Content-Type: application/json
+Accept: application/json
+
+
+{
+  "login": "client",
+  "password": "client"
+}

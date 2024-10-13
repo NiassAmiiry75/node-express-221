@@ -1,32 +1,44 @@
 import express from 'express';
+import cors from 'cors';
 import routerArticle from './routes/article.route';
 import routerClient from './routes/client.route';
-//import routerLogin from './routes/client.route';
-import routerLogin from './routes/login.route'
-const expres = require('express');
-const cors = require('cors');
+import routerDette from './routes/dette.route';
+import routerAuth from './routes/auth.route';
+import routerPaiement from './routes/paiement.route'; 
+import PrismaClient from './config/prisma.config';
+import routerUser from './routes/user.route';
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from './config/swagger.config';
 
-// const app = express();
+class App {
+    public server;
+    public prisma;
 
-const app = express();
-app.use(express.json());
-app.use("/api/v1/articles", routerArticle)
-app.use("/api/v1/clients", routerClient)
-app.use("/api/login", routerLogin)
+    constructor() {
+        this.server = express();
+        this.middleware();
+        this.routes();
+        this.prisma = PrismaClient;
+    }
 
-// Configuration de CORS pour autoriser les requêtes depuis votre frontend
-app.use(cors({
-    origin: 'http://localhost:3000', // Remplacez par l'URL de votre frontend
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Méthodes HTTP autorisées
-    credentials: true // Si vous utilisez des cookies, sessions ou authentification
-}));
-// Vos routes ici
-app.get('/', (req, res) => {
-    res.send('Backend configuré avec CORS');
-});
+    middleware() {
+        this.server.use(cors({
+            origin: 'http://localhost:5173', 
+            credentials: true,
+        }));
+        this.server.use(express.json());
+        this.server.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+    }
 
-const port = 3000; // Exemple de port pour le backend
-app.listen(port, () => {
-    console.log(`Serveur backend démarré sur le port ${port}`);
-});
+    routes() {
+        this.server.use("/api/v1/articles", routerArticle);
+        this.server.use("/api/v1/clients", routerClient);
+        this.server.use("/api/v1/dettes", routerDette);
+        this.server.use("/api/v1/paiements", routerPaiement); 
+        this.server.use('/api/v1/auth', routerAuth);
+        this.server.use('/api/v1/users', routerUser);
+    }
+}
+
+const app = new App();
 export default app;
